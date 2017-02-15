@@ -10,7 +10,33 @@
 <body>
 	<h4>Google Maps and Geolocation</h4>
 	<!--set up the html file for the google maps api-->
-	<div class="map-wrapper"></div>
+	<span class="latitude"></span>
+	<span class="longitude"></span>
+	
+	<script type="text/javascript">
+		(function() {
+			var lat = document.querySelector('.latitude'),
+				lng = document.querySelector('.longitude'),
+				heading = document.querySelector('h4');
+			
+			function getLocation() {
+				if (navigator.geolocation) {
+					navigator.geolocation.getCurrentPosition(showPosition);
+				}else{
+					console.log('no geolocation for you!');
+				}
+			}
+			
+			function showPosition(position) {
+				heading.innerHTML = "Got location!";
+				lat.innerHTML = "Latitude: " + position.coords.latitude;
+				lng.innerHTML = "Longitude: " + position.coords.longitude;
+			}
+			
+			getLocation();
+		})();
+	</script>
+	
 	<script src="js/main.js"></script>
 </body>
 </html>
